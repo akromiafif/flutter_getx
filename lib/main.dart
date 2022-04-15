@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_getx/my_detail_page.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'my_home_page.dart';
 
@@ -19,6 +20,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       getPages: [
         GetPage(name: '/', page: () => MyHomePage()),
+        GetPage(name: '/detail', page: () => DetailPage()),
       ],
     );
   }

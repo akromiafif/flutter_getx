@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class ContentPage extends StatefulWidget {
   const ContentPage({Key? key}) : super(key: key);
@@ -153,9 +154,12 @@ class _ContentPageState extends State<ContentPage> {
               height: 220,
               child: PageView.builder(
                   controller: PageController(viewportFraction: 0.88),
-                  itemCount: 4,
+                  itemCount: info.length,
                   itemBuilder: (_, i) {
                     return GestureDetector(
+                      onTap: () {
+                        Get.toNamed('/detail');
+                      },
                       child: Container(
                         padding: const EdgeInsets.only(left: 20, top: 20),
                         height: 220,
@@ -172,7 +176,7 @@ class _ContentPageState extends State<ContentPage> {
                                 child: Row(
                               children: [
                                 Text(
-                                  "Title",
+                                  info[i]['title'],
                                   style: TextStyle(
                                       fontSize: 30,
                                       fontWeight: FontWeight.w500,
@@ -185,7 +189,7 @@ class _ContentPageState extends State<ContentPage> {
                             Container(
                               width: width,
                               child: Text(
-                                "Text",
+                                info[i]['text'],
                                 style: TextStyle(
                                     fontSize: 20, color: Color(0xFFb8eefc)),
                               ),
@@ -205,8 +209,7 @@ class _ContentPageState extends State<ContentPage> {
                                     decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(25),
                                         image: DecorationImage(
-                                            image: AssetImage(
-                                                "img/background.jpg"),
+                                            image: AssetImage(info[i]['img']),
                                             fit: BoxFit.cover)),
                                   ),
                                 )
@@ -264,7 +267,7 @@ class _ContentPageState extends State<ContentPage> {
                     child: ListView.builder(
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
-                        itemCount: 4,
+                        itemCount: info.length,
                         itemBuilder: (_, i) {
                           return Container(
                             width: width,
