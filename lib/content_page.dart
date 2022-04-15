@@ -21,6 +21,7 @@ class _ContentPageState extends State<ContentPage> {
         list = json.decode(value);
       });
     });
+
     await DefaultAssetBundle.of(context)
         .loadString('json/detail.json')
         .then((value) {
@@ -128,7 +129,7 @@ class _ContentPageState extends State<ContentPage> {
                   Text(
                     "Show all",
                     style: TextStyle(
-                        color: Color(0xFFcfd5b3),
+                        color: Colors.orange,
                         fontSize: 15,
                         decoration: TextDecoration.none),
                   ),
@@ -158,7 +159,14 @@ class _ContentPageState extends State<ContentPage> {
                   itemBuilder: (_, i) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed('/detail');
+                        Get.toNamed('/detail', arguments: {
+                          'title': info[i]['title'].toString(),
+                          'text': info[i]['text'].toString(),
+                          'name': info[i]['name'].toString(),
+                          'img': info[i]['img'].toString(),
+                          'time': info[i]['time'].toString(),
+                          'prize': info[i]['prize'].toString(),
+                        });
                       },
                       child: Container(
                         padding: const EdgeInsets.only(left: 20, top: 20),
@@ -239,7 +247,7 @@ class _ContentPageState extends State<ContentPage> {
                   Text(
                     "Show all",
                     style: TextStyle(
-                        color: Color(0xFFcfd5b3),
+                        color: Colors.orange,
                         fontSize: 15,
                         decoration: TextDecoration.none),
                   ),
@@ -285,8 +293,7 @@ class _ContentPageState extends State<ContentPage> {
                                 children: [
                                   CircleAvatar(
                                     radius: 40,
-                                    backgroundImage:
-                                        AssetImage("img/background.jpg"),
+                                    backgroundImage: AssetImage(list[i]['img']),
                                   ),
                                   SizedBox(
                                     width: 10,
@@ -297,10 +304,10 @@ class _ContentPageState extends State<ContentPage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Status",
+                                        list[i]['status'],
                                         style: TextStyle(
-                                            color: Color(0xFFfdebb2),
-                                            fontSize: 12,
+                                            color: Colors.orangeAccent,
+                                            fontSize: 18,
                                             decoration: TextDecoration.none),
                                       ),
                                       SizedBox(
@@ -309,7 +316,7 @@ class _ContentPageState extends State<ContentPage> {
                                       SizedBox(
                                         width: 170,
                                         child: Text(
-                                          "Text",
+                                          list[i]['text'],
                                           style: TextStyle(
                                               color: Color(0xFF3b3f42),
                                               fontSize: 18,
@@ -323,9 +330,9 @@ class _ContentPageState extends State<ContentPage> {
                                     width: 70,
                                     height: 70,
                                     child: Text(
-                                      "Time",
+                                      list[i]['time'],
                                       style: TextStyle(
-                                          fontSize: 10,
+                                          fontSize: 12,
                                           decoration: TextDecoration.none,
                                           color: Color(0xFFb2b8bb)),
                                     ),
